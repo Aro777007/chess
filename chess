@@ -1,0 +1,184 @@
+#include <iostream>
+using namespace std;
+
+class game
+{
+    virtual void start(){}
+    virtual void end(){}
+};
+
+class chessGame : public game
+{
+    void start() {}
+};
+
+class matrix
+{
+public:
+    int** arr = nullptr;
+    int size = 8;
+
+    matrix() : arr(new int* [size])
+    {
+
+        for (int i = 0; i < size; ++i)
+        {
+            arr[i] = new int[size];
+            for (int j = 0; j < size; ++j)
+            {
+                arr[i][j] = 1;
+                cout << arr[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    matrix(const matrix& obj)
+    {
+        int** array = new int* [size];
+        this->arr = obj.arr;
+        this->size = obj.size;
+
+    }
+};
+
+class figure : public chessGame
+{
+public:
+    string colour;
+    string type;
+};
+
+class w_king :public matrix
+{
+public:
+    int a;
+    int b;
+
+    w_king()
+    {
+        cin >> a;
+        cin >> b;
+
+        int dj[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; //j
+        int di[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; //i
+
+        for (int i = 0; i < 8; i++)
+        {
+            int new_i = a + di[i];
+            int new_j = b + dj[i];
+
+            if (new_i >= 0 && new_i < size && new_j >= 0 && new_j < size)
+                arr[new_j][new_i] = 0;
+        }
+
+        for (int i = 0; i < size; ++i)
+        {
+            for (int j = 0; j < size; ++j)
+            {
+                cout << arr[i][j] << " ";
+            }
+            cout << endl;
+        }
+
+        cout << endl;
+        cout << endl;
+
+        cout << endl;
+
+
+    }
+};
+
+
+class b_king :public matrix
+{
+public:
+    int a;
+    int b;
+
+    b_king()
+    {
+        cin >> a;
+        cin >> b;
+
+        int dj[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; //j
+        int di[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; //i
+
+        for (int i = 0; i < 8; i++)
+        {
+            int new_i = a + di[i];
+            int new_j = b + dj[i];
+
+            if (new_i > 0 && new_i < size && new_j > 0 && new_j < size)
+                arr[new_j][new_i] = 0;
+        }
+
+        for (int i = 0; i < size - 1; ++i)
+        {
+            for (int j = 0; j < size - 1; ++j)
+            {
+                cout << arr[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+
+};
+
+
+class b_boat : public figure, public matrix
+{
+public:
+
+    b_boat()
+    {
+        colour = "black";
+        type = "black boat";
+
+    }
+};
+
+class b_horse : public figure, public matrix
+{
+public:
+
+    b_horse()
+    {
+        colour = "black";
+        type = "black boat";
+
+      
+    }
+};
+
+
+class b_elephant : public figure, public matrix
+{
+public:
+
+    b_elephant()
+    {
+        colour = "black";
+        type = "black boat";
+
+        
+    }
+};
+
+
+
+
+int main()
+{
+    game g;
+    w_king obj;
+    b_king obj1;
+    b_boat obj2;
+    b_horse obj3;
+    b_elephant obj4;
+    return 0;
+}
+
+
