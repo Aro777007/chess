@@ -1,12 +1,16 @@
+
 #include <iostream>
 using namespace std;
 #include <string>
 
+int a;
+int b;
 
 string blackKing = "BK34";
 string whiteKing = "WK45";
 string blackKnight = "BK56";
 string blackBishop = "BB33";
+
 
 class game
 {
@@ -57,6 +61,7 @@ public:
                 this->arr[i][j] = obj.arr[i][j];
             }
         }
+        
     }
 
 };
@@ -78,8 +83,8 @@ public:
 
     w_king()
     {
-        int a = 3;
-        int b = 4;
+        int a = 7;
+        int b = 0;
 
         int dj[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; //j
         int di[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; //i
@@ -120,7 +125,7 @@ public:
     {
 
         int a = 4;
-        int b = 5;
+        int b = 4;
 
         int dj[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; //j
         int di[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; //i
@@ -163,8 +168,8 @@ public:
     b_knight()
     {
         
-        int a = 5;
-        int b = 6;
+        int a = 6;
+        int b = 3;
 
         int dj[] = { -2,-2,2,2,-1,-1,1,1 }; //j
         int di[] = { -1,1,-1,1,-2,2,-2,2 }; //i
@@ -208,8 +213,8 @@ public:
         type = "black boat";
 
 
-        int a = 3;
-        int b = 3;
+        int a = 5;
+        int b = 2;
 
 
         int dj[] = { -1,-2,-3,-1,-2,-3,1,2,3,4,1,2,3 }; //j
@@ -246,6 +251,75 @@ public:
 
 };
 
+class b_quenn : public figure, public matrix
+{
+public:
+
+    b_quenn()
+    {
+        colour = "black";
+        type = "black boat";
+
+
+        int a = 4;
+        int b = 6;
+
+
+        int dj[] = { -1,-2,-3,-1,-2,-3,1,2,3,4,1,2,3,-1,-2,-3,0,0,0,0,1,2,3,4,0,0,0 }; //j
+        int di[] = { -1,-2,-3,1,2,3,1,2,3,4,-1,-2,-3,0,0,0,1,2,3,4,0,0,0,0,-1,-2,-3 }; //i
+
+
+        for (int i = 0; i < 27; i++)
+        {
+            int new_i = a + di[i];
+            int new_j = b + dj[i];
+
+            if (new_i >= 0 && new_i < size && new_j >= 0 && new_j < size)
+                arr[new_j][new_i] = 0;
+        }
+
+        for (int i = 0; i < size - 1; ++i)
+        {
+            for (int j = 0; j < size - 1; ++j)
+            {
+                cout << arr[i][j] << " ";
+            }
+            cout << endl;
+        }
+        cout << endl;
+        cout << endl;
+
+        cout << endl;
+
+    }
+};
+
+
+class checkMate : public matrix
+{
+public:
+    checkMate()
+    {
+        int kingRow = whiteKing[a] - '0';
+        int kingCol = whiteKing[b] - '0';
+
+        for (int i = kingRow - 1; i <= kingRow + 1; i++)
+        {
+            for (int j = kingCol - 1; j <= kingCol + 1; j++)
+            {
+                if (i >= 0 && i < size && j >= 0 && j < size && !(i == kingRow && j == kingCol))
+                {
+                    if (arr[i][j] != 0)
+                    {
+                        cout << "not mate";
+                    }
+                }
+            }
+        }
+
+        cout << "mate";
+    }
+};
 
 
 int main()
@@ -255,5 +329,7 @@ int main()
     b_king obj1;
     b_knight obj2;
     b_bishop obj3;
+    b_quenn obj4;
+    checkMate obj5;
     return 0;
 }
