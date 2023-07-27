@@ -295,31 +295,7 @@ public:
 };
 
 
-class checkMate : public matrix
-{
-public:
-    checkMate()
-    {
-        int kingRow = whiteKing[a] - '0';
-        int kingCol = whiteKing[b] - '0';
 
-        for (int i = kingRow - 1; i <= kingRow + 1; i++)
-        {
-            for (int j = kingCol - 1; j <= kingCol + 1; j++)
-            {
-                if (i >= 0 && i < size && j >= 0 && j < size && !(i == kingRow && j == kingCol))
-                {
-                    if (arr[i][j] != 0)
-                    {
-                        cout << "not mate";
-                    }
-                }
-            }
-        }
-
-        cout << "mate";
-    }
-};
 
 
 int main()
@@ -329,7 +305,6 @@ int main()
     b_king obj1;
     b_knight obj2;
     b_bishop obj3;
-    b_quenn obj4;
-    checkMate obj5;
+    b_quenn obj4
     return 0;
 }
