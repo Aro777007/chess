@@ -1,4 +1,3 @@
-
 #include <iostream>
 using namespace std;
 #include <string>
@@ -26,272 +25,244 @@ class chessGame : public game
 class matrix
 {
 public:
+  
 
-
-    int** arr = nullptr;
-     int size = 8;
+    string** arr = nullptr;
+    int size = 8;
 
     matrix()
     {
-        arr = new int* [size];
+        arr = new string * [size];
 
         for (int i = 0; i < size; ++i)
         {
-            arr[i] = new int[size];
+            arr[i] = new string[size];
             for (int j = 0; j < size; ++j)
             {
-                arr[i][j] = 1;
-                cout << arr[i][j] << " ";
+                arr[i][j] = "~";
             }
-            cout << endl;
+
         }
     }
-
 
     matrix(const matrix& obj)
     {
         this->size = obj.size;
-        this->arr = new int* [size];
+        this->arr = new string * [size];
 
         for (int i = 0; i < size; ++i)
         {
-            this->arr[i] = new int[size];
+            this->arr[i] = new string[size];
             for (int j = 0; j < size; ++j)
             {
                 this->arr[i][j] = obj.arr[i][j];
             }
         }
-        
+
     }
+
+    ~matrix()
+    {
+        delete[] arr;
+    }
+
 
 };
 
-class figure
+class figure : public chessGame
 {
 public:
 
-    figure(){}
+    figure() {}
 
     string colour;
     string type;
 };
 
-class w_king :public matrix
+class black_king :public figure
 {
 public:
 
-
-    w_king()
+    black_king()
     {
-        int a = 7;
-        int b = 0;
+        colour = "black";
+        type = "king";
+    }
+};
 
-        int dj[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; //j
-        int di[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; //i
+class white_king :public figure
+{
+public:
+    white_king()
+    {
+        colour = "white";
+        type = "king";
+    }
+};
 
-        for (int i = 0; i < 8; i++)
-        {
-            int new_i = a + di[i];
-            int new_j = b + dj[i];
+class white_knight : public figure
+{
+public:
 
-            if (new_i >= 0 && new_i < size && new_j >= 0 && new_j < size)
-                arr[new_j][new_i] = 0;
-        }
+    white_knight()
+    {
+        colour = "white";
+        type = "knight";
+    }
+};
 
-        for (int i = 0; i < size; ++i)
-        {
-            for (int j = 0; j < size; ++j)
-            {
-                cout << arr[i][j] << " ";
-            }
-            cout << endl;
-        }
+class white_bishop : public figure, public matrix
+{
+public:
+    white_bishop()
+    {
+        colour = "white";
+        type = "bishop";
+    }
+};
 
-        cout << endl;
-        cout << endl;
+class white_quenn : public figure {
+public:
 
-        cout << endl;
-
-
+    white_quenn()
+    {
+        colour = "white";
+        type = "queen";
     }
 };
 
 
-class b_king :public matrix
-{
-public:
-   
-    b_king()
-    {
-
-        int a = 4;
-        int b = 4;
-
-        int dj[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; //j
-        int di[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; //i
-
-        for (int i = 0; i < 8; i++)
-        {
-            int new_i = a + di[i];
-            int new_j = b + dj[i];
-
-            if (new_i >= 0 && new_i < size && new_j >= 0 && new_j < size)
-                arr[new_j][new_i] = 0;
-        }
-
-        for (int i = 0; i < size - 1; ++i)
-        {
-            for (int j = 0; j < size - 1; ++j)
-            {
-                cout << arr[i][j] << " ";
-            }
-            cout << endl;
-        }
-
-        cout << endl;
-        cout << endl;
-
-        cout << endl;
 
 
-    }
-
-
-};
-
-
-class b_knight : public figure, public matrix
+class steps : public matrix
 {
 public:
 
-   
-    b_knight()
+    steps()
     {
         
-        int a = 6;
-        int b = 3;
+        int c = 7; // whiteking
+        int d = 7;
 
-        int dj[] = { -2,-2,2,2,-1,-1,1,1 }; //j
-        int di[] = { -1,1,-1,1,-2,2,-2,2 }; //i
+        int a = 0; // blackking
+        int b = 7;
+  
+        int e = 3; // whitebishop
+        int f = 4;
+
+        int g = 3; // whiteknight
+        int h = 6;
+
+        int k = 0; // whitqueen
+        int l = 4;
+
+
+
+
+
+
+        int dii[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; 
+        int djj[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; 
+
+
+        for (int k = 0; k < 8; k++)
+        {
+            int new_ii = c + dii[k];
+            int new_jj = d + djj[k];
+
+            if (new_ii >= 0 && new_ii < size && new_jj >= 0 && new_jj < size)
+            {
+                arr[new_jj][new_ii] = "0";
+            }
+        }
+
+       
+        int diii[] = { -1, -1, 1, 1 }; 
+        int djjj[] = { -1, 1, -1, 1 }; 
+
+
+        for (int k = 0; k < 4; k++)
+        {
+            int new_iii = e + diii[k];
+            int new_jjj = f + djjj[k];
+
+            while (new_iii >= 0 && new_iii < size && new_jjj >= 0 && new_jjj < size)
+            {
+                arr[new_jjj][new_iii] = "0";
+                new_iii += diii[k];
+                new_jjj += djjj[k];
+            }
+        }
+
+       
+
+        int diiii[] = { -1, -2, -2, -1, 1, 2, 2, 1 }; 
+        int djjjj[] = { -2, -1, 1, 2, 2, 1, -1, -2 }; 
+
+
+        for (int k = 0; k < 8; k++)
+        {
+            int new_iiii = g + diiii[k];
+            int new_jjjj = h + djjjj[k];
+
+            if (new_iiii >= 0 && new_iiii < size && new_jjjj >= 0 && new_jjjj < size)
+            {
+                arr[new_jjjj][new_iiii] = "0";
+            }
+        }
+
+        
+        int djjjjj[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+        int diiiii[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; 
+
 
         for (int i = 0; i < 8; i++)
         {
-            int new_i = a + di[i];
-            int new_j = b + dj[i];
+            int new_iiiii = k + diiiii[i];
+            int new_jjjjj = l + djjjjj[i];
 
-            if (new_i >= 0 && new_i < size && new_j >= 0 && new_j < size)
-                arr[new_j][new_i] = 0;
-        }
-
-        for (int i = 0; i < size - 1; ++i)
-        {
-            for (int j = 0; j < size - 1; ++j)
+            while (new_iiiii >= 0 && new_iiiii < size && new_jjjjj >= 0 && new_jjjjj < size)
             {
-                cout << arr[i][j] << " ";
+                arr[new_jjjjj][new_iiiii] = "0";
+                new_iiiii += diiiii[i];
+                new_jjjjj += djjjjj[i];
             }
-            cout << endl;
-
-
         }
-        cout << endl;
-        cout << endl;
-
-        cout << endl;
+       
 
 
-    }
-};
-class b_bishop : public matrix, public figure {
-public:
+        int di[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+        int dj[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+        int new_i=0;
+        int new_j=0;
 
-    
-
-    b_bishop()
-    {
-
-        colour = "black";
-        type = "black boat";
-
-
-        int a = 5;
-        int b = 2;
-
-
-        int dj[] = { -1,-2,-3,-1,-2,-3,1,2,3,4,1,2,3 }; //j
-        int di[] = { -1,-2,-3,1,2,3,1,2,3,4,-1,-2,-3 }; //i
-
-
-        for (int i = 0; i < 13; i++)
-        {
-            int new_i = a + di[i];
-            int new_j = b + dj[i];
-
-            if (new_i >= 0 && new_i < size && new_j >= 0 && new_j < size)
-                arr[new_j][new_i] = 0;
-        }
-
-        for (int i = 0; i < size - 1; ++i)
-        {
-            for (int j = 0; j < size - 1; ++j)
+            for (int i = 0; i < size; ++i)
             {
-                cout << arr[i][j] << " ";
+                for (int j = 0; j < size; ++j)
+                {
+                    cout << arr[i][j] << " ";
+                }
+                cout << endl;
             }
-            cout << endl;
+
+            for (int i = 0; i < 8; i++)
+            {
+                int new_i = a + di[i];
+                int new_j = b + dj[i];
+
+            }
 
 
-        }
-        cout << endl;
-        cout << endl;
 
-        cout << endl;
-
+            if (arr[a][b]=="0" && arr[new_i][new_j] == "0")
+            {
+                cout << " mate";
+            }
+            else
+                cout << "noo";
+   
     }
 
-
-
-};
-
-class b_quenn : public figure, public matrix
-{
-public:
-
-    b_quenn()
-    {
-        colour = "black";
-        type = "black boat";
-
-
-        int a = 4;
-        int b = 6;
-
-
-        int dj[] = { -1,-2,-3,-1,-2,-3,1,2,3,4,1,2,3,-1,-2,-3,0,0,0,0,1,2,3,4,0,0,0 }; //j
-        int di[] = { -1,-2,-3,1,2,3,1,2,3,4,-1,-2,-3,0,0,0,1,2,3,4,0,0,0,0,-1,-2,-3 }; //i
-
-
-        for (int i = 0; i < 27; i++)
-        {
-            int new_i = a + di[i];
-            int new_j = b + dj[i];
-
-            if (new_i >= 0 && new_i < size && new_j >= 0 && new_j < size)
-                arr[new_j][new_i] = 0;
-        }
-
-        for (int i = 0; i < size - 1; ++i)
-        {
-            for (int j = 0; j < size - 1; ++j)
-            {
-                cout << arr[i][j] << " ";
-            }
-            cout << endl;
-        }
-        cout << endl;
-        cout << endl;
-
-        cout << endl;
-
-    }
 };
 
 
@@ -301,10 +272,12 @@ public:
 int main()
 {
     game g;
-    w_king obj;
-    b_king obj1;
-    b_knight obj2;
-    b_bishop obj3;
-    b_quenn obj4
-    return 0;
+
+    white_king obj;
+    black_king obj1;
+    white_knight obj2;
+    white_bishop obj3;
+    white_quenn obj4;
+
+    steps s;
 }
