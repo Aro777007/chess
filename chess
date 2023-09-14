@@ -2,14 +2,6 @@
 using namespace std;
 #include <string>
 
-int a;
-int b;
-
-string blackKing = "BK34";
-string whiteKing = "WK45";
-string blackKnight = "BK56";
-string blackBishop = "BB33";
-
 
 class game
 {
@@ -25,7 +17,7 @@ class chessGame : public game
 class matrix
 {
 public:
-  
+
 
     string** arr = nullptr;
     int size = 8;
@@ -140,13 +132,13 @@ public:
 
     steps()
     {
-        
+
         int c = 7; // whiteking
         int d = 7;
 
         int a = 0; // blackking
         int b = 7;
-  
+
         int e = 3; // whitebishop
         int f = 4;
 
@@ -161,8 +153,8 @@ public:
 
 
 
-        int dii[] = { -1, -1, -1, 0, 0, 1, 1, 1 }; 
-        int djj[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; 
+        int dii[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+        int djj[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
 
         for (int k = 0; k < 8; k++)
@@ -176,9 +168,9 @@ public:
             }
         }
 
-       
-        int diii[] = { -1, -1, 1, 1 }; 
-        int djjj[] = { -1, 1, -1, 1 }; 
+
+        int diii[] = { -1, -1, 1, 1 };
+        int djjj[] = { -1, 1, -1, 1 };
 
 
         for (int k = 0; k < 4; k++)
@@ -194,10 +186,10 @@ public:
             }
         }
 
-       
 
-        int diiii[] = { -1, -2, -2, -1, 1, 2, 2, 1 }; 
-        int djjjj[] = { -2, -1, 1, 2, 2, 1, -1, -2 }; 
+
+        int diiii[] = { -1, -2, -2, -1, 1, 2, 2, 1 };
+        int djjjj[] = { -2, -1, 1, 2, 2, 1, -1, -2 };
 
 
         for (int k = 0; k < 8; k++)
@@ -211,9 +203,9 @@ public:
             }
         }
 
-        
+
         int djjjjj[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
-        int diiiii[] = { -1, 0, 1, -1, 1, -1, 0, 1 }; 
+        int diiiii[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
 
         for (int i = 0; i < 8; i++)
@@ -228,41 +220,54 @@ public:
                 new_jjjjj += djjjjj[i];
             }
         }
-       
+
 
 
         int di[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
         int dj[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
-        int new_i=0;
-        int new_j=0;
-
-            for (int i = 0; i < size; ++i)
+        int new_i = 0;
+        int new_j = 0;
+        /*
+        for (int i = 0; i < size; ++i)
+        {
+            for (int j = 0; j < size; ++j)
             {
-                for (int j = 0; j < size; ++j)
-                {
-                    cout << arr[i][j] << " ";
-                }
-                cout << endl;
+                cout << arr[i][j] << " ";
             }
+            cout << endl;
+        }
+        */
+        for (int i = 0; i < 8; i++)
+        {
+            int new_i = a + di[i];
+            int new_j = b + dj[i];
 
-            for (int i = 0; i < 8; i++)
-            {
-                int new_i = a + di[i];
-                int new_j = b + dj[i];
-
-            }
+        }
 
 
 
-            if (arr[a][b]=="0" && arr[new_i][new_j] == "0")
-            {
-                cout << " mate";
-            }
-            else
-                cout << "noo";
-   
+        if (arr[a][b] == "0" && arr[new_i][new_j] == "0")
+        {
+            cout << " mate" << endl;
+        }
+        else
+            cout << "noo" << endl;
+
     }
 
+    void f()
+    {
+        cout << "   a  b  c  d  e  f  g  h\n";
+        for (int i = 0; i < 8; ++i) {
+            std::cout << 8 - i << " ";
+            for (int j = 0; j < 8; ++j) {
+                std::cout <<" " << arr[i][j] << " ";
+            }
+            std::cout << " " << 8 - i << "\n";
+        }
+        cout << "   a  b  c  d  e  f  g  h\n";
+
+    }
 };
 
 
@@ -280,4 +285,8 @@ int main()
     white_quenn obj4;
 
     steps s;
+
+    
+    s.f();
+
 }
