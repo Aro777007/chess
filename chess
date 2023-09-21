@@ -126,7 +126,7 @@ public:
 
 
 
-class steps : public matrix
+class steps : public matrix,public game
 {
 public:
 
@@ -134,24 +134,22 @@ public:
     {
 
         int c = 7; // whiteking
-        int d = 7;
+        int d = 0;
 
-        int a = 0; // blackking
-        int b = 7;
+        int a = 5; // blackking
+        int b = 0;
 
-        int e = 3; // whitebishop
-        int f = 4;
+        int e = 6; // whitebishop
+        int f = 6;
 
-        int g = 3; // whiteknight
-        int h = 6;
+        int g = 5; // whiteknight
+        int h = 2;
 
         int k = 0; // whitqueen
-        int l = 4;
+        int l = 1;
 
-
-
-
-
+        
+       
 
         int dii[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
         int djj[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
@@ -227,16 +225,7 @@ public:
         int dj[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
         int new_i = 0;
         int new_j = 0;
-        /*
-        for (int i = 0; i < size; ++i)
-        {
-            for (int j = 0; j < size; ++j)
-            {
-                cout << arr[i][j] << " ";
-            }
-            cout << endl;
-        }
-        */
+     
         for (int i = 0; i < 8; i++)
         {
             int new_i = a + di[i];
@@ -245,29 +234,31 @@ public:
         }
 
 
-
-        if (arr[a][b] == "0" && arr[new_i][new_j] == "0")
+        if(arr[a][b] == "0" && arr[new_i][new_j] == "0")
         {
             cout << " mate" << endl;
         }
         else
-            cout << "noo" << endl;
+            cout << "no mate" << endl;
 
     }
 
     void f()
     {
         cout << "   a  b  c  d  e  f  g  h\n";
-        for (int i = 0; i < 8; ++i) {
-            std::cout << 8 - i << " ";
+        for (int i = 7; i >=0; --i) {
+            std::cout << 7 - i << " ";
             for (int j = 0; j < 8; ++j) {
-                std::cout <<" " << arr[i][j] << " ";
+                std::cout << " " << arr[i][j] << " ";
             }
-            std::cout << " " << 8 - i << "\n";
+            std::cout << " " << 7 - i << "\n";
         }
         cout << "   a  b  c  d  e  f  g  h\n";
 
     }
+
+    void end()final
+    {}
 };
 
 
@@ -277,16 +268,7 @@ public:
 int main()
 {
     game g;
-
-    white_king obj;
-    black_king obj1;
-    white_knight obj2;
-    white_bishop obj3;
-    white_quenn obj4;
-
     steps s;
-
-    
     s.f();
 
 }
